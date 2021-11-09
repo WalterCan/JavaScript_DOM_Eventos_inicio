@@ -4,4 +4,11 @@
 //
 
 const btnEnviar = document.querySelector(".boton--primario");
-console.log(btnEnviar);
+btnEnviar.addEventListener("click", function (evento) {
+  //Pasamos como parametro evento, hace referencia al evento que está pasando
+  console.log(evento);
+  evento.preventDefault();
+  console.log("Enviando Formulario");
+});
+
+// Cuando presionamos en el submit, su funcion por default es enviar esa información.
