@@ -34,52 +34,36 @@ formulario.addEventListener("submit", function (evento) {
     //Validamos que los datos no estén vacios para poder enviar el formulario
 
     // Creamos una Funcion que va a mostrar el error
-    mostrarError("Todos los Campos Son Obligarios");
+    mostrarAlerta("Todos los Campos Son Obligarios", true); //Pasamos un Segundo Argumento.
 
     return; //Corta la Ejecucion del Codigo en caso de que la condicion se cumple.Previene la ejecución del codigo
   }
 
   // Creando ALERTA DE CARGA CORRECTA
 
-  mostrarMensaje("Mensaje Enviado Correctamente");
+  mostrarAlerta("Mensaje Enviado Correctamente");
 });
 
 // Creamos Funciones
 
 function leerTexto(e) {
   datos[e.target.id] = e.target.value;
-  console.log(datos);
 }
 
 // ---REFACTORIZAMOS LAS FUNCIONES
 
-function mostrarAlerta(mensaje) {
+function mostrarAlerta(mensaje, error = null) {
   //   Vamos a Crear HTML Y Agregarlo
   const alerta = document.createElement("P"); //Creamos HTML
   alerta.textContent = mensaje; //Le pasamos el mensaje al Parrafo
-}
-
-//
-
-// Muestra un Error en Pantalla
-
-function mostrarError(mensaje) {
-  error.textContent = mensaje;
-  error.classList.add("error"); //Agregamos una Clase para poder darle estilo en el CSS
-  formulario.appendChild(error); //Lo Agregamos al HTML
+  if (error) {
+    alerta.classList.add("error"); //Agregamos una Clase para poder darle estilo en el CSS
+  } else {
+    alerta.classList.add("correcto"); //Agregamos una Clase para poder darle estilo en el CSS
+  }
+  formulario.appendChild(alerta);
   //desaparezca la Alerta luego de 5 Segundos
   setTimeout(() => {
-    error.remove();
-  }, 3000);
-}
-
-// Carga Alerta de Carga Correcta
-
-function mostrarMensaje(mensaje) {
-  correcto.textContent = mensaje;
-  correcto.classList.add("correcto");
-  formulario.appendChild(correcto);
-  setTimeout(() => {
-    correcto.remove();
+    alerta.remove();
   }, 3000);
 }
